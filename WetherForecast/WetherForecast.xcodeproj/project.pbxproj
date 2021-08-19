@@ -9,12 +9,14 @@
 /* Begin PBXBuildFile section */
 		71058EC126CE8596000B5E66 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71058EC026CE8596000B5E66 /* AppDelegate.swift */; };
 		71058EC326CE8596000B5E66 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71058EC226CE8596000B5E66 /* SceneDelegate.swift */; };
-		71058EC526CE8596000B5E66 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71058EC426CE8596000B5E66 /* ViewController.swift */; };
 		71058EC826CE8596000B5E66 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 71058EC626CE8596000B5E66 /* Main.storyboard */; };
 		71058ECA26CE8598000B5E66 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 71058EC926CE8598000B5E66 /* Assets.xcassets */; };
 		71058ECD26CE8598000B5E66 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 71058ECB26CE8598000B5E66 /* LaunchScreen.storyboard */; };
 		71058ED826CE8599000B5E66 /* WetherForecastTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71058ED726CE8599000B5E66 /* WetherForecastTests.swift */; };
 		71058EE326CE8599000B5E66 /* WetherForecastUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71058EE226CE8599000B5E66 /* WetherForecastUITests.swift */; };
+		71527D0526CEFD8F003E9942 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71527D0226CEFD8F003E9942 /* HomeViewModel.swift */; };
+		71527D0626CEFD8F003E9942 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71527D0326CEFD8F003E9942 /* HomeViewController.swift */; };
+		71527D0726CEFD8F003E9942 /* CityCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71527D0426CEFD8F003E9942 /* CityCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,7 +40,6 @@
 		71058EBD26CE8596000B5E66 /* WetherForecast.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WetherForecast.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		71058EC026CE8596000B5E66 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		71058EC226CE8596000B5E66 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		71058EC426CE8596000B5E66 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		71058EC726CE8596000B5E66 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		71058EC926CE8598000B5E66 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		71058ECC26CE8598000B5E66 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -49,6 +50,9 @@
 		71058EDE26CE8599000B5E66 /* WetherForecastUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WetherForecastUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		71058EE226CE8599000B5E66 /* WetherForecastUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WetherForecastUITests.swift; sourceTree = "<group>"; };
 		71058EE426CE8599000B5E66 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		71527D0226CEFD8F003E9942 /* HomeViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		71527D0326CEFD8F003E9942 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		71527D0426CEFD8F003E9942 /* CityCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CityCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,9 +103,9 @@
 		71058EBF26CE8596000B5E66 /* WetherForecast */ = {
 			isa = PBXGroup;
 			children = (
+				71527D0126CEFD8F003E9942 /* HomeScreen */,
 				71058EC026CE8596000B5E66 /* AppDelegate.swift */,
 				71058EC226CE8596000B5E66 /* SceneDelegate.swift */,
-				71058EC426CE8596000B5E66 /* ViewController.swift */,
 				71058EC626CE8596000B5E66 /* Main.storyboard */,
 				71058EC926CE8598000B5E66 /* Assets.xcassets */,
 				71058ECB26CE8598000B5E66 /* LaunchScreen.storyboard */,
@@ -126,6 +130,16 @@
 				71058EE426CE8599000B5E66 /* Info.plist */,
 			);
 			path = WetherForecastUITests;
+			sourceTree = "<group>";
+		};
+		71527D0126CEFD8F003E9942 /* HomeScreen */ = {
+			isa = PBXGroup;
+			children = (
+				71527D0226CEFD8F003E9942 /* HomeViewModel.swift */,
+				71527D0326CEFD8F003E9942 /* HomeViewController.swift */,
+				71527D0426CEFD8F003E9942 /* CityCell.swift */,
+			);
+			path = HomeScreen;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -258,9 +272,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				71058EC526CE8596000B5E66 /* ViewController.swift in Sources */,
 				71058EC126CE8596000B5E66 /* AppDelegate.swift in Sources */,
+				71527D0526CEFD8F003E9942 /* HomeViewModel.swift in Sources */,
+				71527D0726CEFD8F003E9942 /* CityCell.swift in Sources */,
 				71058EC326CE8596000B5E66 /* SceneDelegate.swift in Sources */,
+				71527D0626CEFD8F003E9942 /* HomeViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
