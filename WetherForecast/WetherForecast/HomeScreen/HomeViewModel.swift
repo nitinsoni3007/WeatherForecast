@@ -10,6 +10,7 @@ import Foundation
 //ToDo: we can use combine later
 protocol HomeViewModelDelegate {
     func updatedCities()
+    func showWeatherDetails(cityName: String)
 }
 
 class HomeViewModel {
@@ -21,7 +22,7 @@ class HomeViewModel {
     }
     
     func didSelectCity(cityName: String) {
-        print("selected = \(cityName)")
+        delegate?.showWeatherDetails(cityName: cityName)
     }
     
     func removeCity(cityName: String) {

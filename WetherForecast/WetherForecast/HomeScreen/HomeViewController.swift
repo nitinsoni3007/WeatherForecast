@@ -99,4 +99,12 @@ extension HomeViewController: HomeViewModelDelegate {
     func updatedCities() {
         refreshHomeScreen()
     }
+    
+    func showWeatherDetails(cityName: String) {
+        guard let weatherDetailsVC = storyboard?.instantiateViewController(identifier: "WeatherDetailsViewController") as? WeatherDetailsViewController else {
+            return
+        }
+        weatherDetailsVC.cityName = cityName
+        navigationController?.pushViewController(weatherDetailsVC, animated: true)
+    }
 }
