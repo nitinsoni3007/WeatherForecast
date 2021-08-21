@@ -21,7 +21,7 @@ class HomeViewController: UIViewController, UIGestureRecognizerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         viewModel.delegate = self
-        refreshHomeScreen()
+        tableview.register(UINib(nibName: String(describing: CityCell.self), bundle: Bundle.main), forCellReuseIdentifier: reusableIdentifierCityCell)
     }
     
     func refreshHomeScreen() {
@@ -36,6 +36,8 @@ class HomeViewController: UIViewController, UIGestureRecognizerDelegate {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         addGestureToMapView()
+        refreshHomeScreen()
+        showHelpScreen()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -43,6 +45,14 @@ class HomeViewController: UIViewController, UIGestureRecognizerDelegate {
         if let longPress = mapView.gestureRecognizers?.first {
             mapView.removeGestureRecognizer(longPress)
         }
+    }
+    
+    func showHelpScreen() {
+        guard let helpVC = storyboard?.instantiateViewController(identifier: "HelpViewController") as? HelpViewController else {return}
+        helpVC.view.backgroundColor = UIColor.clear
+        self.addChild(helpVC)
+        self.view.addSubview(helpVC.view)
+        helpVC.didMove(toParent: self)
     }
     
     //MARK: MapView functions

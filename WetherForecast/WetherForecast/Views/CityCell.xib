@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="CityCell" id="MGa-ER-J5P" customClass="CityCell" customModule="WetherForecast" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="56"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="MGa-ER-J5P" id="zOW-m5-2gP">
+                <rect key="frame" x="0.0" y="0.0" width="414" height="56"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K2w-U8-669">
+                        <rect key="frame" x="8" y="17.5" width="342" height="21"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <color key="textColor" systemColor="systemBlueColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="close" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gXK-DS-v8d">
+                        <rect key="frame" x="370" y="16" width="24" height="24"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="24" id="3fY-jd-IDd"/>
+                            <constraint firstAttribute="width" constant="24" id="TAE-Bn-alV"/>
+                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="24" id="xKV-3k-YbA"/>
+                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="24" id="xld-Vu-vXQ"/>
+                        </constraints>
+                        <state key="normal">
+                            <color key="titleColor" red="0.94901960780000005" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        </state>
+                        <connections>
+                            <action selector="removeCityAction:" destination="MGa-ER-J5P" eventType="touchUpInside" id="a2I-2H-Rm3"/>
+                        </connections>
+                    </button>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="trailing" secondItem="gXK-DS-v8d" secondAttribute="trailing" constant="20" id="7RQ-5w-n3h"/>
+                    <constraint firstItem="gXK-DS-v8d" firstAttribute="leading" relation="lessThanOrEqual" secondItem="K2w-U8-669" secondAttribute="trailing" constant="20" id="L0N-pK-qFN"/>
+                    <constraint firstItem="K2w-U8-669" firstAttribute="centerY" secondItem="zOW-m5-2gP" secondAttribute="centerY" id="LYO-Io-QaD"/>
+                    <constraint firstItem="K2w-U8-669" firstAttribute="leading" secondItem="zOW-m5-2gP" secondAttribute="leading" constant="8" id="Sqp-WH-9Gd"/>
+                    <constraint firstItem="gXK-DS-v8d" firstAttribute="centerY" secondItem="zOW-m5-2gP" secondAttribute="centerY" id="vYP-Ea-N8o"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="cityNameLabel" destination="K2w-U8-669" id="Ld5-w3-nIs"/>
+            </connections>
+            <point key="canvasLocation" x="93" y="78"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <systemColor name="systemBlueColor">
+            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
+</document>
