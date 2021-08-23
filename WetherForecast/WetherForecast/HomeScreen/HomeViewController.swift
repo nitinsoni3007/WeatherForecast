@@ -20,7 +20,7 @@ class HomeViewController: UIViewController, UIGestureRecognizerDelegate {
     }()
     override func viewDidLoad() {
         super.viewDidLoad()
-        viewModel.delegate = self
+        self.bindViewModel()
         tableview.register(UINib(nibName: String(describing: CityCell.self), bundle: Bundle.main), forCellReuseIdentifier: reusableIdentifierCityCell)
         showHelpScreen()
     }
@@ -108,16 +108,19 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     }
 }
 
-extension HomeViewController: HomeViewModelDelegate {
-    func updatedCities() {
-        refreshHomeScreen()
-    }
-    
-    func showWeatherDetails(cityName: String) {
-        guard let weatherDetailsVC = storyboard?.instantiateViewController(identifier: "WeatherDetailsViewController") as? WeatherDetailsViewController else {
-            return
+extension HomeViewController {
+    func bindViewModel() {
+        
+        viewModel.updatedCities = {
+            self.refreshHomeScreen()
         }
-        weatherDetailsVC.cityName = cityName
-        navigationController?.pushViewController(weatherDetailsVC, animated: true)
+        
+        viewModel.showWeatherDetails = { cityName in
+            guard let weatherDetailsVC = self.storyboard?.instantiateViewController(identifier: "WeatherDetailsViewController") as? WeatherDetailsViewController else {
+                return
+            }
+            weatherDetailsVC.cityName = cityName
+            self.navigationController?.pushViewController(weatherDetailsVC, animated: true)
+        }
     }
 }

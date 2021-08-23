@@ -8,21 +8,22 @@
 import Foundation
 
 //ToDo: we can use combine later
-protocol HomeViewModelDelegate {
-    func updatedCities()
-    func showWeatherDetails(cityName: String)
-}
+//protocol HomeViewModelDelegate {
+//    func updatedCities()
+//    func showWeatherDetails(cityName: String)
+//}
 
 class HomeViewModel {
-    var delegate: HomeViewModelDelegate?
+    var updatedCities: (() -> Void)?
+    var showWeatherDetails: ((String) -> Void)?
     var cities: [String] = [String]() {
         didSet {
-            delegate?.updatedCities()
+            self.updatedCities?()
         }
     }
     
     func didSelectCity(cityName: String) {
-        delegate?.showWeatherDetails(cityName: cityName)
+        self.showWeatherDetails?(cityName)
     }
     
     func removeCity(cityName: String) {

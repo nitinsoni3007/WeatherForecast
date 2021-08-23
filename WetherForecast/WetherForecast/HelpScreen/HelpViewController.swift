@@ -11,6 +11,9 @@ import WebKit
 class HelpViewController: UIViewController {
 
     @IBOutlet weak var webview: WKWebView!
+    lazy var viewmodel = {
+        HelpViewModel()
+    }()
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -28,10 +31,14 @@ class HelpViewController: UIViewController {
     }
     
     func loadRequest() {
-        guard let filePath = Bundle.main.path(forResource: "HelpScreen1", ofType: "html") else {return}
-        let urlRequest = URLRequest(url: URL(fileURLWithPath: filePath))
-        webview.configuration.userContentController.add(self, name: "buttonClicked")
-        webview.load(urlRequest)
+//        guard let filePath = Bundle.main.path(forResource: "HelpScreen1", ofType: "html") else {return}
+//        let urlRequest = URLRequest(url: URL(fileURLWithPath: filePath))
+        viewmodel.getHelpScreenRequestToLoad { urlRequest in
+            if let request = urlRequest {
+            webview.configuration.userContentController.add(self, name: "buttonClicked")
+            webview.load(request)
+            }
+        }
     }
 }
 

@@ -7,13 +7,6 @@
 
 import Foundation
 
-protocol WeatherDetailsViewModelDelegate {
-    func receivedWeatherDetails(_ cityWeather: CityWeather)
-    func failedToReceiveWeatherDetails(_ error: APIError)
-    func recievedCityForecast(_ cityforecast: CityForecast)
-    func failedToRecieveForecast(_ error: APIError)
-}
-
 enum TempratureUnit: String {
     case metric = "metric"
     case imperial = "imperial"
@@ -34,11 +27,13 @@ enum TempratureUnit: String {
 class WeatherDetailsViewModel {
     var cityName: String?
     var currentTempUnit: TempratureUnit = .metric
-//    var error: String?
     var cityWeather: CityWeather?
     var cityForecastResponse: CityForecast?
-    var delegate: WeatherDetailsViewModelDelegate?
     var weatherService = WeatherService()
+    var receivedWeatherDetails: ((CityWeather) -> Void)?
+    var failedToReceiveWeatherDetails: ((APIError) -> Void)?
+    var recievedCityForecast: ((CityForecast) -> Void)?
+    var failedToRecieveForecast: ((APIError) -> Void)?
     
     func getWeatherDetails(cityName: String) {
         weatherService.getWeatherDetail(cityName, temperatureUnit: .metric) { [weak self] result in
@@ -46,9 +41,9 @@ class WeatherDetailsViewModel {
             switch result {
             case .success(let cityWeather):
                 weakSelf.cityWeather = cityWeather
-                weakSelf.delegate?.receivedWeatherDetails(cityWeather)
+                weakSelf.receivedWeatherDetails?(cityWeather)
             case .failure(let error):
-                weakSelf.delegate?.failedToReceiveWeatherDetails(error)
+                weakSelf.failedToReceiveWeatherDetails?(error)
             }
             self?.getForecastDetails(cityName: cityName)
         }
@@ -60,26 +55,10 @@ class WeatherDetailsViewModel {
             switch result {
             case .success(let cityForecast):
                 weakSelf.cityForecastResponse = cityForecast
-                weakSelf.delegate?.recievedCityForecast(cityForecast)
+                weakSelf.recievedCityForecast?(cityForecast)
             case .failure(let error):
-                weakSelf.delegate?.failedToRecieveForecast(error)
+                weakSelf.failedToRecieveForecast?(error)
             }
         }
     }
-    
-//    func getForecastDetails(cityName: String) {
-//        guard let jsonFile = Bundle.main.path(forResource: "CityForcastResponse", ofType: "json") else {return}
-//        do {
-//        let jsonData = try Data(contentsOf: URL(fileURLWithPath: jsonFile))
-//        do {
-//        let json = try JSONDecoder().decode(CityForecast.self, from: jsonData)
-//            print("json: \(json)")
-//        }catch (let error) {
-//            print("error :\(error)")
-//        }
-//        }catch (let error) {
-//            print("error :\(error)")
-//        }
-//
-//    }
 }

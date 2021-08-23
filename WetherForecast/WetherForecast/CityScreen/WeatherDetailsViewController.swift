@@ -22,10 +22,8 @@ class WeatherDetailsViewController: UIViewController {
     }()
     override func viewDidLoad() {
         super.viewDidLoad()
-//        temperatureLabel.text = "27\u{00B0}C"
         navigationItem.title = cityName
-        viewmodel.delegate = self
-        // Do any additional setup after loading the view.
+        self.bindViewModel()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -42,43 +40,6 @@ class WeatherDetailsViewController: UIViewController {
                 flowLayout.itemSize = CGSize(width: 120, height: 120)
             }
         }
-}
-
-extension WeatherDetailsViewController: WeatherDetailsViewModelDelegate {
-    func recievedCityForecast(_ cityforecast: CityForecast) {
-        if let arrList = cityforecast.list {
-        
-        let filteredList = arrList.filter {$0.dtTxt?.components(separatedBy: " ").last == "09:00:00"}
-            self.arrForcastList = filteredList
-        }
-        DispatchQueue.main.async {
-            self.collectionView.reloadData()
-        }
-    }
-    
-    func failedToRecieveForecast(_ error: APIError) {
-        print("error: \(error.localizedDescription)")
-    }
-    
-    func receivedWeatherDetails(_ cityWeather: CityWeather) {
-        if let temp = cityWeather.main?.temp {
-            let unitSymbol = viewmodel.currentTempUnit.symbol()
-            DispatchQueue.main.async {
-                self.temperatureLabel.text = "\(Int(round(temp)))\(unitSymbol)"
-                self.weatherTitleLabel.text = cityWeather.weather?[0].descriptionValue
-                if let humidity = cityWeather.main?.humidity {
-                self.humidityLabel.text = "\(humidity)"
-                }
-                if let windSpeed = cityWeather.wind?.speed {
-                self.windspeedLabel.text = "\(windSpeed)"
-                }
-            }
-        }
-    }
-    
-    func failedToReceiveWeatherDetails(_ error: APIError) {
-        print("error: \(error.localizedDescription)")
-    }
 }
 
 extension WeatherDetailsViewController: UICollectionViewDataSource {
@@ -113,21 +74,43 @@ extension WeatherDetailsViewController: UICollectionViewDelegateFlowLayout {
 
         return CGSize(width: 120, height: 120)
     }
-//    func collectionView(_ collectionView: UICollectionView,
-//                        layout collectionViewLayout: UICollectionViewLayout,
-//                        minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-//        return 8
-//    }
+}
 
-//    func collectionView(_ collectionView: UICollectionView,
-//                        layout collectionViewLayout: UICollectionViewLayout,
-//                        minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-//        return 0
-//    }
-
-//    func collectionView(_ collectionView: UICollectionView,
-//                        layout collectionViewLayout: UICollectionViewLayout,
-//                        insetForSectionAt section: Int) -> UIEdgeInsets {
-//        return UIEdgeInsets.init(top: 8, left: 8, bottom: 8, right: 8)
-//    }
+extension WeatherDetailsViewController {
+    func bindViewModel() {
+        self.viewmodel.receivedWeatherDetails = { cityWeather in
+            if let temp = cityWeather.main?.temp {
+                let unitSymbol = self.viewmodel.currentTempUnit.symbol()
+                DispatchQueue.main.async {
+                    self.temperatureLabel.text = "\(Int(round(temp)))\(unitSymbol)"
+                    self.weatherTitleLabel.text = cityWeather.weather?[0].descriptionValue
+                    if let humidity = cityWeather.main?.humidity {
+                    self.humidityLabel.text = "\(humidity)"
+                    }
+                    if let windSpeed = cityWeather.wind?.speed {
+                    self.windspeedLabel.text = "\(windSpeed)"
+                    }
+                }
+            }
+        }
+        
+        self.viewmodel.recievedCityForecast = { cityforecast in
+            if let arrList = cityforecast.list {
+            
+            let filteredList = arrList.filter {$0.dtTxt?.components(separatedBy: " ").last == "09:00:00"}
+                self.arrForcastList = filteredList
+            }
+            DispatchQueue.main.async {
+                self.collectionView.reloadData()
+            }
+        }
+        
+        self.viewmodel.failedToReceiveWeatherDetails = { error in
+            print("error = \(error)")
+        }
+        
+        self.viewmodel.failedToRecieveForecast = { error in
+            print("error = \(error)")
+        }
+    }
 }

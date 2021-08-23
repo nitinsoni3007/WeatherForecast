@@ -1,0 +1,44 @@
+{
+    "coord": {
+        "lon": 73.8553,
+        "lat": 18.5196
+    },
+    "weather": [
+        {
+            "id": 803,
+            "main": "Clouds",
+            "description": "broken clouds",
+            "icon": "04d"
+        }
+    ],
+    "base": "stations",
+    "main": {
+        "temp": 25.6,
+        "feels_like": 26.28,
+        "temp_min": 25.6,
+        "temp_max": 25.6,
+        "pressure": 1008,
+        "humidity": 79,
+        "sea_level": 1008,
+        "grnd_level": 946
+    },
+    "visibility": 10000,
+    "wind": {
+        "speed": 3.91,
+        "deg": 270,
+        "gust": 5.4
+    },
+    "clouds": {
+        "all": 57
+    },
+    "dt": 1629723821,
+    "sys": {
+        "country": "IN",
+        "sunrise": 1629679699,
+        "sunset": 1629725195
+    },
+    "timezone": 19800,
+    "id": 1259229,
+    "name": "Pune",
+    "cod": 200
+}
