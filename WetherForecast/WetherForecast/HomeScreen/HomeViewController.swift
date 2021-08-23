@@ -22,6 +22,7 @@ class HomeViewController: UIViewController, UIGestureRecognizerDelegate {
         super.viewDidLoad()
         viewModel.delegate = self
         tableview.register(UINib(nibName: String(describing: CityCell.self), bundle: Bundle.main), forCellReuseIdentifier: reusableIdentifierCityCell)
+        showHelpScreen()
     }
     
     func refreshHomeScreen() {
@@ -37,7 +38,6 @@ class HomeViewController: UIViewController, UIGestureRecognizerDelegate {
         super.viewDidAppear(animated)
         addGestureToMapView()
         refreshHomeScreen()
-        showHelpScreen()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -69,7 +69,6 @@ class HomeViewController: UIViewController, UIGestureRecognizerDelegate {
             let locationCoordinate = mapView.convert(touchPoint, toCoordinateFrom: mapView)
             let location = CLLocation(latitude: locationCoordinate.latitude, longitude: locationCoordinate.longitude)
             showConfirmation(location)
-            print("coordinate = \(location)")
             cityPin.coordinate = location.coordinate
             mapView.addAnnotation(cityPin)
         }
@@ -102,6 +101,10 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         viewModel.didSelectCity(cityName: viewModel.cities[indexPath.row])
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 56
     }
 }
 

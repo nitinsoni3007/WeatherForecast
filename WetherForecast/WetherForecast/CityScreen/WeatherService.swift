@@ -9,6 +9,7 @@ import Foundation
 
 protocol WeatherServiceProtocol {
     func getWeatherDetail(_ cityName: String, temperatureUnit: TempratureUnit, completion: @escaping (Result<CityWeather, APIError>) -> Void)
+    func getForeCastDetials(_ cityName: String, temperatureUnit: TempratureUnit, completion: @escaping (Result<CityForecast, APIError>) -> Void)
 }
 
 class WeatherService: WeatherServiceProtocol {
@@ -19,11 +20,16 @@ class WeatherService: WeatherServiceProtocol {
     }
     // Calls Get current weather API for selected city
     func getWeatherDetail(_ cityName: String, temperatureUnit: TempratureUnit, completion: @escaping (Result<CityWeather, APIError>) -> Void) {
-        let parameters = createQueryParametersForWeatherAPI(cityName, temperatureUnit: temperatureUnit)
+        let parameters = createQueryParameters(cityName, temperatureUnit: temperatureUnit)
         baseService?.get(urlString: Constants.APIs.weatherDetailAPI, headers: nil, queryParams: parameters, success: CityWeather.self, failure: APIError.self, completion)
     }
     
-    private func createQueryParametersForWeatherAPI(_ cityName: String, temperatureUnit: TempratureUnit? = .metric) -> [String: Any]? {
+    func getForeCastDetials(_ cityName: String, temperatureUnit: TempratureUnit, completion: @escaping (Result<CityForecast, APIError>) -> Void) {
+        let parameters = createQueryParameters(cityName, temperatureUnit: temperatureUnit)
+        baseService?.get(urlString: Constants.APIs.forcastAPI, headers: nil, queryParams: parameters, success: CityForecast.self, failure: APIError.self, completion)
+    }
+    
+    private func createQueryParameters(_ cityName: String, temperatureUnit: TempratureUnit? = .metric) -> [String: Any]? {
         var parameters = [
             "q": cityName,
             "appid": Constants.apiKey
